@@ -1,0 +1,53 @@
+#Tweets contenant le mot1 ET le mot2
+<mot1> <mot2>
+
+# Contenant exactement le mot1
+"mot1"
+
+#Tweets containing le mot1 OU le mot2
+<mot1> OR <mot2>
+
+#Contenant "cyber" mais SANS "security"
+cyber -security
+
+#Tous les tweets venant d'un compte / répondant à un autre
+from:<account>
+to:<account>
+
+#Filtrer les résultats (ici par compte suivi en excluant les médias)
+filter:follows
+exclude:medias
+
+#Tweets par dates
+<mot> since:2015-02-20
+<mot> until:2015-02-20
+
+#Retweet minimums / likes minimum / reponses minimum
+min_retweets:x
+min_faves:x
+min_replies:x
+
+#Language
+lang:fr
+
+# Tweets positif  and negatifs
+<mot> :)
+<mot> :(
+
+# Tweets posant une question
+<mot> ?
+
+#Localisation avec un périmètre précis
+near:Paris within:25km
+
+#Filtres
+# - safe : potentiellement hard ou supprimé
+# - media : photos ou vidéos
+# - retweets : seulement les retweets
+# - native_video : vidéo téléchargé (Amplify, Periscope, Vine)
+# - periscope 
+# - vine
+# - images : identifié comme une photo (aussi venant de Instagram)
+# - twimg : liens pic.twitter.com 
+# - links : liens vers une url
+filter:<filtre>
