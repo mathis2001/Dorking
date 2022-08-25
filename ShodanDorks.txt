@@ -20,7 +20,8 @@ org:"Amazon"
 os:"Windows 7"
 port:XX
 postal:
-product:
+product:"apache"
+server:"nginx"
 region:
 scan:
 shodan.module:
@@ -107,17 +108,11 @@ title:"citrix gateway"
 #Trouver des mots de passe wifi en clair.
 html:"def_wirelesspassword"
 
-#Surveillance Cams with username:admin and password:
-NETSurveillance uc-httpd
-
 #Windows RDP Password but may contain secondary windows auth
 "\x03\x00\x00\x0b\x06\xd0\x00\x00\x124\x00"
 
 #Mongo DB servers it may give info about mongo db servers and dashboard
 "MongoDB Server Information" port:27017 -authentication
-
-#FTP accessibles en anonyme:
-"220" "230 Login successful." port:21
 
 #Tableau de bord Jenkins ouverts
 x-jenkins 200
@@ -125,8 +120,102 @@ x-jenkins 200
 #ATM ouverts peut permettre l'accès au guichet automatique
 NCR Port:"161"
 
+#FTP accessibles en anonyme:
+"220" "230 Login successful." port:21
+
 #Telnet Accessibles en anonyme:
 port:23 console gateway
 
+#Unprotected VNC
+"authentication disabled" port:5900,5901 "authentication disabled" "RFB 003.008"
+
 #Sites Wordpress mal configurés le wp-config.php si il est accessible peut donner accès aux identifiants de base de données.
 http.html:"* The wp-config.php creation script uses this file"
+
+#Samsung Electronic Billboards
+"Server: Prismview Player"
+
+#Gas Station Pump Controllers
+"in-tank inventory" port:10001
+
+#Traffic Light Controllers / Red Light Cameras
+mikrotik streetlight
+
+#Electric Vehicle Chargers
+"Server: gSOAP/2.8" "Content-Length: 583"
+
+#Maritime Satellites
+#Shodan made a pretty sweet Ship Tracker that maps ship locations in real time, too!
+"Cobham SATCOM" OR ("Sailor" "VSAT")
+
+#Submarine Mission Control Dashboards
+title:"Slocum Fleet Mission Control"
+
+#Nordex Wind Turbine Farms
+http.title:"Nordex Control" "Windows 2000 5.0 x86" "Jetty/3.1 (JSP 1.1; Servlet 2.2; java 1.6.0_14)"
+
+#Door / Lock Access Controllers
+"HID VertX" port:4070
+
+#Railroad Management
+"log off" "select the appropriate"
+
+#XZERES Wind Turbine
+title:"xzeres wind"
+
+#Generic camera search
+title:camera
+
+#Webcams with screenshots
+webcam has_screenshot:true
+
+#D-Link webcams
+"d-Link Internet Camera, 200 OK"
+
+#Hipcam
+"Hipcam RealServer/V1.0"
+
+#Yawcams
+"Server: yawcam" "Mime-Type: text/html"
+
+#webcamXP/webcam7
+("webcam 7" OR "webcamXP") http.component:"mootools" -401
+
+#Android IP Webcam Server
+"Server: IP Webcam Server" "200 OK"
+
+#Security DVRs
+html:"DVR_H264 ActiveX"
+
+#Surveillance Cams with username:admin and password:
+NETSurveillance uc-httpd
+
+#HP Printers
+"Serial Number:" "Built:" "Server: HP HTTP"
+
+#Xerox Copiers/Printers
+ssl:"Xerox Generic Root"
+
+#Epson Printers
+"SERVER: EPSON_Linux UPnP" "200 OK"
+
+"Server: EPSON-HTTP" "200 OK"
+
+#Canon Printers
+"Server: KS_HTTP" "200 OK"
+
+"Server: CANON HTTP Server"
+
+#Yamaha Stereos
+"Server: AV_Receiver" "HTTP/1.1 406"
+
+#Apple AirPlay Receivers
+#Apple TVs, HomePods, etc.
+
+"\x08_airplay" port:5353
+
+#Chromecasts / Smart TVs
+"Chromecast:" port:8008
+
+#Crestron Smart Home Controllers
+"Model: PYNG-HUB"
