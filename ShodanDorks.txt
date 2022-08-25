@@ -1,20 +1,132 @@
+#General:
+all:
+asn:"<asn>"
+city:"Paris"
+country:"FR"
+cpe:
+device:
+geo:"56.913055,118.250862"
+has_ipv6:true/false
+has_screenshot:true/false
+has_ssl:true/false
+has_vuln:true/false
+hash:"<hash>"
+hostname:"Google"
+ip:"X.X.X.X/XX"
+isp:"<isp>"
+link:
+net:"X.X.X.X/XX"
+org:"Amazon"
+os:"Windows 7"
+port:XX
+postal:
+product:
+region:
+scan:
+shodan.module:
+state:
+version:2.2.1
+
+#Screenshots:
+screenshot.hash:
+screenshot.label:
+
+#Cloud:
+cloud.provider:
+cloud.region:
+cloud.service:
+
+#HTTP:
+http.component:
+http.component_category:
+http.favicon.hash:
+http.headers_hash:
+http.html:
+http.html_hash:
+http.robots_hash:
+http.securitytxt:
+http.status:
+http.title:
+http.waf:
+
+#Bitcoin:
+bitcoin.ip:
+bitcoin.ip_count:
+bitcoin.port:
+bitcoin.version:
+Restricted:
+
+#The following filters are only available to users of higher API plans.
+
+tag:
+vuln:
+SNMP:
+snmp.contact:
+snmp.location:
+snmp.name:
+SSL:
+ssl:
+ssl.alpn:
+ssl.cert.alg:
+ssl.cert.expired:
+ssl.cert.extension:
+ssl.cert.fingerprint:
+ssl.cert.issuer.cn:
+ssl.cert.pubkey.bits:
+ssl.cert.pubkey.type:
+ssl.cert.serial:
+ssl.cert.subject.cn:
+ssl.chain_count:
+ssl.cipher.bits:
+ssl.cipher.name:
+ssl.cipher.version:
+ssl.ja3s:
+ssl.jarm:
+ssl.version:
+
+#NTP:
+ntp.ip:
+ntp.ip_count:
+ntp.more:
+ntp.port:
+
+#Telnet:
+telnet.do:
+telnet.dont:
+telnet.option:
+telnet.will:
+telnet.wont:
+
+#SSH:
+ssh.hassh:
+ssh.type:
+
 #Trouver des gateway Citrix.
 title:"citrix gateway"
+
 #Trouver des mots de passe wifi en clair.
 html:"def_wirelesspassword"
+
 #Surveillance Cams with username:admin and password:
 NETSurveillance uc-httpd
+
 #Windows RDP Password but may contain secondary windows auth
 "\x03\x00\x00\x0b\x06\xd0\x00\x00\x124\x00"
+
 #Mongo DB servers it may give info about mongo db servers and dashboard
 "MongoDB Server Information" port:27017 -authentication
+
 #FTP accessibles en anonyme:
 "220" "230 Login successful." port:21
+
 #Tableau de bord Jenkins ouverts
 x-jenkins 200
+
 #ATM ouverts peut permettre l'accès au guichet automatique
 NCR Port:"161"
+
 #Telnet Accessibles en anonyme:
 port:23 console gateway
+
 #Sites Wordpress mal configurés le wp-config.php si il est accessible peut donner accès aux identifiants de base de données.
 http.html:"* The wp-config.php creation script uses this file"
