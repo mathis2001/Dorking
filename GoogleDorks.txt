@@ -1,0 +1,35 @@
+site:*target.com
+site:*.*.target.com
+site:*.*.*.target.com 
+site:*target.com filetype:pdf
+site:target.* inurl:/admin
+site:target.com intext:"index of /"
+site:codepad.co "company"
+site:scribd.com "company"
+site:npmjs.com "company"
+site:npm.runkit.com "company"
+site:libraries.co "company"
+site:ycombinator.com "company"
+site:coggle.it "company"
+site:papaly.com "company"
+site:google.com "compagny"
+site:trello.com "company"
+site:prezi.com "company"
+site:jsdelivr.net "company"
+site:codepen.io "company"
+site:codeshare.io "company"
+site:sharecode.io "company"
+site:pastebin.com "company"
+site:repl.it "company"
+site:gitter.im "company"
+site:bitbucket.org "company"
+site:zoom.us "company"
+site:atlassian.com "company"
+site:s3.amazonaws.com inurl:"company"
+inurl:gitlab "company"
+intext:"index of" /etc/passwd
+intext:"index of" /etc/shadow
+"index.of" id_rsa inurl:target
+"index.of" private.key inurl:target
+"© target 20XX"
+"© 20XX target"
