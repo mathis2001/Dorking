@@ -1,0 +1,20 @@
+#Trouver des gateway Citrix.
+title:"citrix gateway"
+#Trouver des mots de passe wifi en clair.
+html:"def_wirelesspassword"
+#Surveillance Cams with username:admin and password:
+NETSurveillance uc-httpd
+#Windows RDP Password but may contain secondary windows auth
+"\x03\x00\x00\x0b\x06\xd0\x00\x00\x124\x00"
+#Mongo DB servers it may give info about mongo db servers and dashboard
+"MongoDB Server Information" port:27017 -authentication
+#FTP accessibles en anonyme:
+"220" "230 Login successful." port:21
+#Tableau de bord Jenkins ouverts
+x-jenkins 200
+#ATM ouverts peut permettre l'accès au guichet automatique
+NCR Port:"161"
+#Telnet Accessibles en anonyme:
+port:23 console gateway
+#Sites Wordpress mal configurés le wp-config.php si il est accessible peut donner accès aux identifiants de base de données.
+http.html:"* The wp-config.php creation script uses this file"
