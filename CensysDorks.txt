@@ -1,0 +1,224 @@
+##Industrial Control Systems
+#Prismview (Samsung Electronic Billboards)
+services.tls.certificates.leaf_data.subject.common_name: "Prismview" or services.http.response.headers.server: "Prismview Player"
+
+#Gas Station Pump Controllers (ATGs)
+(same_service(port: 10001 and banner: "IN-TANK INVENTORY") or services.service_name: ATG) and services.truncated: false
+
+#Electric Vehicle Chargers
+same_service(http.response.headers.server: "gSOAP/2.8" and http.response.headers.content_length: 583)
+
+#Carel PlantVisor
+services.http.response.html_title: "CAREL Pl@ntVisor"
+
+#C4 Max Vehicle GPS 
+services.banner: "[1m[35mWelcome on console"
+
+#GaugeTech Electricity Meters 
+services.http.response.headers.server: "EIG Embedded Web Server"
+
+#XZERES Wind Turbine 
+services.http.response.html_title: "XZERES Wind"
+#Note: This query works best with virtual hosts included.
+
+##Internet of Things Devices
+#Roombas
+services.tls.certificates.leaf_data.issuer.common_name: "Roomba CA"
+
+#Mein Automowers
+services.http.response.headers.Www_Authenticate: `Basic realm= "Mein Automower (Robonect Hx+)"`
+
+#WinAQMS Environmental Monitor 
+services.banner: "WinAQMS Data Server" and services.truncated: false
+
+#Emerson Site Supervisor 
+services.http.response.html_title: "Emerson Site Supervisor"
+
+#Nethix Wireless Controller 
+services.http.response.headers.set_cookie: "NethixSession"
+
+##Security Applications
+#Cobalt Strike Servers 
+services.certificate: {
+    "64257fc0fac31c01a5ccd816c73ea86e639260da1604d04db869bb603c2886e6",
+    "87f2085c32b6a2cc709b365f55873e207a9caa10bffecf2fd16d3cf9d94d390c"
+}
+or services.tls.certificates.leaf_data.issuer.common_name: "Major Cobalt Strike"
+or services.tls.certificates.leaf_data.subject.common_name: "Major Cobalt Strike"
+or services.jarm.fingerprint: {
+    "07d14d16d21d21d07c42d41d00041d24a458a375eef0c576d23a7bab9a9fb1",
+    "07d14d16d21d21d00042d41d00041de5fb3038104f457d92ba02e9311512c2"
+}
+
+#Metasploit Servers 
+services.http.response.html_title: "Metasploit" and (
+    services.tls.certificates.leaf_data.subject.organization: "Rapid7"
+    or services.tls.certificates.leaf_data.subject.common_name: "MetasploitSelfSignedCA"
+)
+or services.jarm.fingerprint: {
+    "07d14d16d21d21d00042d43d000000aa99ce74e2c6d013c745aa52b5cc042d",
+    "07d14d16d21d21d07c42d43d000000f50d155305214cf247147c43c0f1a823"
+}
+
+#Nessus Scanner Servers 
+services.http.response.headers.server: "NessusWWW"
+or services.tls.certificates.leaf_data.subject.organizational_unit: "Nessus Server"
+NTOP Network Analyzers 
+services.http.response.html_title: "Welcome to ntopng"
+or same_service(
+    services.http.response.html_title: "Global Traffic Statistics"
+    and services.http.response.headers.server: "ntop/*"
+)
+
+#Merlin C2 
+services.jarm.fingerprint: "29d21b20d29d29d21c41d21b21b41d494e0df9532e75299f15ba73156cee38"
+
+#Mythic C2 
+same_service(port: 7443 and tls.certificates.leaf_data.subject.organization: "Mythic")
+#Note: When using the same_service operator, the initial services. prefix is optional.
+
+#Deimos C2 
+services.jarm.fingerprint: "00000000000000000041d00000041d9535d5979f591ae8e547c5e5743e5b64"
+
+#Covenant C2 
+same_service(
+    http.response.body: "Blazor"
+    and tls.certificates.leaf_data.issuer.common_name: "Covenant"
+)
+
+#EvilGinx2 
+services.jarm.fingerprint: "20d14d20d21d20d20c20d14d20d20daddf8a68a1444c74b6dbe09910a511e6"
+
+#Splunk 
+services.software.product: "Splunk"
+
+##Databases
+#Exposed CouchDB Servers 
+services.http.response.body: '"couchdb": "Welcome"'
+
+##Dashboards
+#cAdvisor Dashboards 
+same_service(
+    services.http.response.html_title=`cAdvisor - /`
+    and services.http.response.status_code=200
+    and services.http.request.uri="*/containers/"
+)
+
+#HashiCorp Consul Dashboards 
+same_service(
+    services.http.response.html_title=`Consul by HashiCorp`
+    and services.http.request.uri: "*/ui/"
+)
+
+#Netdata Dashboards 
+same_service(
+    services.http.response.headers.Server="Netdata Embedded HTTP*"
+    and services.http.response.html_title="netdata dashboard"
+)
+
+#Rancher Dashboards 
+same_service(
+    services.http.response.headers.unknown.name: "X-Rancher-Version"
+    and services.http.response.html_title: "Loading&hellip;"
+)
+
+#Traefik Dashboards 
+same_service(
+    services.http.request.uri: "*/dashboard/"
+    and services.http.response.html_title: "Traefik"
+)
+
+#Weave Scope 
+same_service(
+    services.http.response.html_title: "Weave Scope"
+    and services.http.response.body="*WEAVEWORKS_CSRF*"
+)
+
+##Game Servers
+#Counter-Strike: Global Offensive 
+same_service(banner: "Counter-Strike: Global Offensive Server" and service_name: VALVE)
+
+##Media Servers
+#Plex Media Server 
+services.http.response.headers.unknown.name: "X-Plex-Protocol"
+
+##Random Services
+#Hosts emitting GNSS payloads 
+services.banner: "$GPRMC"
+
+#Directory Listing 
+services.http.response.html_title: "Index of /"
+
+#Swagger UI 
+services.http.response.html_title: "Swagger UI - "
+
+#Mongo Express Admin Interface 
+services.http.response.html_title: "Home - Mongo Express"
+
+#shell2http 
+services.http.response.html_title: "shell2http"
+
+#Busybox Shells 
+same_service(services.banner: "Enter 'help' for a list of built-in commands" and services.service_name: TELNET) and services.truncated: false
+
+#Unauthenticated Redis Servers 
+services.redis.ping_response: "PONG"
+
+#Misconfigured Kubernetes Installations 
+services.kubernetes.pod_names: *
+
+#Misconfigured WordPress 
+services.http.response.body: "The wp-config.php creation script uses this file"
+
+#Unconfigured AdGuard 
+same_service(
+    services.http.response.html_title: "Setup AdGuard Home"
+    and services.http.request.uri="*/install.html"
+)
+
+#Prometheus Node Exporters 
+same_service(services.http.response.html_title: "node exporter" and services.http.response.body: "/metrics")
+
+#VictoriaMetrics VMAgent 
+services.http.response.body: "<h2>vmagent</h2>"
+
+#SonarQube 
+same_service(
+    http.response.html_title: "SonarQube"
+    and http.response.status_code: 200
+    and http.response.protocol: "HTTP/1.1"
+)
+
+##Advanced Queries
+#Honeypots Hosts 
+services.truncated: true
+
+#North Korean Hosts 
+location.country: "North Korea"
+
+#Hosts that identify as US government or military 
+dns.names: *.gov or dns.names: *.mil or name: *.gov or name: *.mil
+
+#Services Listening on 53 that are not DNS 
+same_service(services.port: 53 and not services.service_name: DNS) and services.truncated: false
+
+#Services Listening on Port 22 that are not SSH 
+same_service(
+    not services.service_name: {SSH}
+    and services.port: 22
+    and not services.banner: {"Connection refused", "SSH-", "Exceeded MaxStartups", "Too many users", "Connection closed by server"}
+)
+and services.truncated: false
+
+#Services Listening on 80 or 443 that are not HTTP or HTTPS (or UNKNOWN with TLS) 
+not same_service(
+    services.port: 443
+    and services.name: UNKNOWN
+    and services.tls.certificates.leaf_data.subject_dn: *
+)
+and same_service(
+    services.port: {80, 443}
+    and not services.service_name: {KUBERNETES, ANYCONNECT, OPENVPN, HTTP}
+    and not services.banner: “HTTP/”
+)
+and services.truncated: false
