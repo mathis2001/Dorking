@@ -1,1 +1,1 @@
-<a href="content://com.android.calendar/events">test</a>
+<a href="intent://com.android.calendar/events">test</a>
